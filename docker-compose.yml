@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_NAME=${POSTGRES_DB}
+      - DB_PORT=${POSTGRES_PORT}
+    depends_on:
+      - db
+    networks:
+      - rede_local
+  db:
+    image: postgres:14.19-alpine3.21
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - rede_local
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+networks:
+  rede_local:
+    driver: bridge
+
+volumes:
+  db_data:
