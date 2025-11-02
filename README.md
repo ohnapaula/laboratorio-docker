@@ -17,7 +17,12 @@ Após cumprir todos os pré-requisitos o próximo passo é baixar o projeto exec
 ```bash
    git clone https://github.com/ohnapaula/laboratorio-docker.git
 ```
-#### 1. Definindo Variáveis de Ambiente
+#### 1. Entrando na pasta do projeto
+```bash
+   cd laboratorio-docker
+```
+
+#### 2. Definindo Variáveis de Ambiente
 - Primeiro, crie um arquivo `.env` dentro do diretório `/laboratorio-docker` com as seguintes variáveis de ambiente:
 
    - POSTGRES_PASSWORD=`<senha_do_postgres>`
@@ -26,7 +31,11 @@ Após cumprir todos os pré-requisitos o próximo passo é baixar o projeto exec
 
 **OBSERVAÇÃO**: Substitua `<senha_do_postgres>`, `<usuario_do_postgres>` e `<nome_do_banco_de_dados>` pelos valores desejados para sua configuração do banco de dados PostgreSQL.
 
-#### 2. Rodando o Docker Compose
+#### 3. Rodando o Docker Compose
 Dentro da pasta `laboratorio-docker` rode o seguinte comando no terminal:
 ```bash
 docker compose up --build -d
+```
+
+A aplicação estará disponível em: http://localhost:5000/
+
